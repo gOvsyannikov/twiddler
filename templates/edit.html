@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+<h1>Редактировать профиль</h1>
+<div> 
+    <form method="POST">
+        <div>
+            {% if user.name is none %}
+                {% if mark %}
+                <input type="text" size="21" name="name" placeholder="Имя" required/>
+                {% else %}
+                <input type="text" size="21" name="name" placeholder="Имя" disabled required/>
+                {% endif %}
+            {% else %}
+                {% if mark %}
+                <input type="text" size="21" name="name" value={{user.name}} placeholder="Имя" required/>
+                {% else %}
+                <input type="text" size="21" name="name" value={{user.name}} placeholder="Имя" disabled required/>
+                {% endif %}
+            {% endif %}
+
+            {% if user.surname is none %}
+                {% if mark %}
+                <input type="text" size="21" name="surname" placeholder="Фамилия" />
+                {% else %}
+                <input type="text" size="21" name="surname" placeholder="Фамилия" disabled />
+                {% endif %}
+            {% else %}
+                {% if mark %}
+                <input type="text" size="21" name="surname" value={{user.surname}} placeholder="Фамилия" />
+                {% else %}
+                <input type="text" size="21" name="surname" value={{user.surname}} placeholder="Фамилия" disabled />
+                {% endif %}
+            {% endif %}
+
+            {% if user.age is none %}
+                {% if mark %}
+                <input type="text" size="5" name="age" placeholder="Возраст" />
+                {% else %}
+                <input type="text" size="5" name="age" placeholder="Возраст" disabled />
+                {% endif %}
+            {% else %}
+                {% if mark %}
+                <input type="text" size="5" name="age" value={{user.age}} placeholder="Возраст" />
+                {% else %}
+                <input type="text" size="5" name="age" value={{user.age}} placeholder="Возраст" disabled />
+                {% endif %}
+            {% endif %}
+		</div>
+        <div>
+            {% if user.email is none %}
+                {% if mark %}
+                <input type="text" name="email" size="27" placeholder="E-Mail" required/>
+                {% else %}
+                <input type="text" name="email" size="27" placeholder="E-Mail" disabled required/>
+                {% endif %}
+            {% else %}
+                {% if mark %}
+                <input type="text" name="email" size="27" value={{user.email}} placeholder="E-Mail" required/>
+                {% else %}
+                <input type="text" name="email" size="27" value={{user.email}} placeholder="E-Mail" disabled required/>
+                {% endif %}
+            {% endif %}
+
+            {% if user.phone is none %}
+                {% if mark %}
+                <input type="text" name="phone" size="27" placeholder="Телефон" />
+                {% else %}
+                <input type="text" name="phone" size="27" placeholder="Телефон" disabled />
+                {% endif %}
+            {% else %}
+                {% if mark %}
+                <input type="text" name="phone" size="27" value={{user.phone}} placeholder="Телефон" />
+                {% else %}
+                <input type="text" name="phone" size="27" value={{user.phone}} placeholder="Телефон" disabled />
+                {% endif %}
+            {% endif %}
+        </div>
+		<div>
+            {% if user.vk_id is none %}
+                {% if mark %}
+                <input type="text" name="vk" size="27" placeholder="VKontakte (durov, id785465)" />
+                {% else %}
+                <input type="text" name="vk" size="27" placeholder="VKontakte (durov, id785465)" disabled />
+                {% endif %}
+            {% else %}
+                {% if mark %}
+                <input type="text" name="vk" size="27" value={{user.vk_id}} placeholder="VKontakte (durov, id785465)" />
+                {% else %}
+                <input type="text" name="vk" size="27" value={{user.vk_id}} placeholder="VKontakte (durov, id785465)" disabled />
+                {% endif %}
+            {% endif %}
+            {% if user.fb_id is none %}
+                {% if mark %}
+                <input type="text" name="fb" size="27" placeholder="Facebook (DrDre, profile.php?id=1809)" />
+                {% else %}
+                <input type="text" name="fb" size="27" placeholder="Facebook (DrDre, profile.php?id=1809)" disabled />
+                {% endif %}
+            {% else %}
+                {% if mark %}
+                <input type="text" name="fb" size="27" value={{user.fb_id}} placeholder="Facebook (DrDre, profile.php?id=1809)" />
+                {% else %}
+                <input type="text" name="fb" size="27" value={{user.fb_id}} placeholder="Facebook (DrDre, profile.php?id=1809)" disabled />
+                {% endif %}
+            {% endif %}
+
+        </div>
+		<div>
+            {% if user.info is none %}
+                {% if mark %}
+                <input type="text" size="61" name="info" placeholder="Информация о себе" />
+                {% else %}
+                <input type="text" size="61" name="info" placeholder="Информация о себе" disabled />
+                {% endif %}
+            {% else %}
+                {% if mark %}
+                <input type="text" size="61" name="info" value={{user.info}} placeholder="Информация о себе" />
+                {% else %}
+                <input type="text" size="61" name="info" value={{user.info}} placeholder="Информация о себе" disabled />
+                {% endif %}
+            {% endif %}
+        </div>
+        {% if mark %}
+        <div><input type="submit" value="Изменить" /></div>
+        {% endif %}
+    </form>
+    <form action="/user/{{ user_id }}">
+        <div><input type="submit" value="Назад"></div>
+    </form>
+</div>
+</body>
+</html>
