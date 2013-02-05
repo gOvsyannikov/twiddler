@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Спланировать</title>
+    <style type="text/css">
+        #tab{
+            width:100%;
+        }
+        #l {
+            margin-left: 100px;
+        }
+        #r {
+            margin-left: 10px;
+            margin-right: 100px;
+        }
+    </style>
+</head>
+<body>
+<table border="0" id="tab">
+    <tr>
+        <td id="l">
+        <table border="0" >
+            {% for plan in plan_list %}
+            <tr>
+                <td><h3>{{ plan.name }}</h3></td>
+            </tr>
+            <tr>
+                <td><b>Начало</b></td>
+                <td>{{ plan.start }}</td>
+            </tr>
+            <tr>
+                <td><b>Конец</b></td>
+                <td>{{ plan.end }}</td>
+            </tr>
+            <tr>
+                <td><b>Статус</b></td>
+                <td>{{ plan.status }}</td>
+            </tr>
+            <tr>
+                <td><b>Описание</b></td>
+                <td>{{ plan.info }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        </td>
+        <td id="r">
+            <form method="POST">
+                <table border="0" >
+                    <tr>
+                        <td><input type="text" size="21" name="name" placeholder="Название" required/></td>
+                    </tr>
+                    <tr>
+                        <td><b>Начало</b></td>
+                        <td><input type="date" name="start_date" required/></td>
+                        <td><input type="time" name="start_time" required/></td>
+                    </tr>
+                    <tr>
+                        <td><b>Конец</b></td>
+                        <td><input type="date" name="end_date" required/></td>
+                        <td><input type="time" name="end_time" required/></td>
+                    </tr>
+                    <tr>
+                        <td><b>Статус</b></td>
+                        <td>
+                            <input type="radio" name="status" value="1" />1
+                            <input type="radio" name="status" value="2" />2
+                            <input type="radio" name="status" value="3" />3
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Описание</b></td>
+                        <td><textarea rows="4" cols="20" name="info" placeholder="Информация о событии" ></textarea></td>
+                    </tr>
+                </table>
+                <input type="submit" value="Добавить" />
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

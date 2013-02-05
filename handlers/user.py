@@ -10,6 +10,7 @@ class MainHandler(webapp2.RequestHandler):
 
         if user:
             mas_users = MyUser.all().fetch(200)
+            print len(mas_users)
 
             for temp_user in mas_users:
                 if user.user_id() == temp_user.login:
@@ -193,7 +194,99 @@ class ProfileHandler(webapp2.RequestHandler):
         user.delete()
         self.redirect(users.create_logout_url("/"))
 
+class PlanHandler(webapp2.RequestHandler):
+    def get(self, user_id):
+        curr_user = users.get_current_user()
 
+        tid = try_fetch(user_id, int)
+        if not tid:
+            self.response.set_status(401)
+            return
+
+        user = MyUser.get_by_id(tid)
+
+        if not user:
+            self.response.set_status(401)
+            return
+
+        if not curr_user.user_id() == user.login:
+            self.response.set_status(406)
+            return
+
+        plan_list = []
+        plan_mas = MyEvent.all().fetch(200)
+        for curr_plan in plan_mas:
+            for user_plan in user.plan:
+                if int(curr_plan.key().id()) == int(user_plan):
+                    plan_list.append(curr_plan)
+                    curr_plan._id = curr_plan.key().id()
+
+        template_values = {
+            'plan_list' : plan_list,
+            'user_id' : user_id,
+            'user' : user,
+            'plan_mas' : plan_mas
+        }
+        template = main.jinja_environment.get_template('templates/plan.html')
+        self.response.out.write(template.render(template_values))
+
+    def post(self, user_id):
+        curr_user = users.get_current_user()
+
+        tid = try_fetch(user_id, int)
+        if not tid:
+            self.response.set_status(401)
+            return
+
+        user = MyUser.get_by_id(tid)
+
+        if not user:
+            self.response.set_status(401)
+            return
+
+        if not curr_user.user_id() == user.login:
+            self.response.set_status(406)
+            return
+
+        name = self.request.get('name')
+        start_date = self.request.get('start_date')
+        start_time = self.request.get('start_time')
+        end_date = self.request.get('end_date')
+        end_time = self.request.get('end_time')
+        status = self.request.get('status')
+        info = self.request.get('info')
+
+        event = MyEvent()
+        event.name = name
+        event.info = info
+
+        if try_fetch(status, int) != None:
+            event.status = int(status)
+        else:
+            event.status = 1
+
+        start = start_date.split('-')
+        time = start_time.split(':')
+        mystart = datetime.datetime(int(start[0]), int(start[1]), int(start[2]), int(time[0]), int(time[1]))
+
+        end = end_date.split('-')
+        time = end_time.split(':')
+        myend = datetime.datetime(int(end[0]), int(end[1]), int(end[2]), int(time[0]), int(time[1]))
+
+        if myend < mystart:
+            self.redirect('/plan/' + str(user_id))
+
+        event.start = mystart
+        event.end = myend
+
+        event.put()
+        event.login = str(event.key().id())
+        event._id = event.key().id()
+
+        user.plan.append(event.login)
+        user.put()
+
+        self.redirect('/plan/' + str(user_id))
 
 def try_fetch(x, t):
     try:

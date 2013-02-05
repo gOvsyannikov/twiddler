@@ -19,11 +19,14 @@ class MyUser(db.Model):
     image = db.StringProperty()
     _id = db.IntegerProperty()
 
-class Event(db.Model):
+class MyEvent(db.Model):
+    login = db.StringProperty()
     start = db.DateTimeProperty()
     end = db.DateTimeProperty()
     status = db.IntegerProperty(default = 1)
     info = db.TextProperty()
     location = db.GeoPtProperty()
+    _id = db.IntegerProperty()
+    name = db.StringProperty()
 
 

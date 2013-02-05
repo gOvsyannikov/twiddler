@@ -6,6 +6,7 @@ jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.di
 app = webapp2.WSGIApplication([
                                   ('/', MainHandler),
                                   (r'/user/(.*)', ProfileHandler),
-                                  (r'/edit/(.*)', EditHandler)
+                                  (r'/edit/(.*)', EditHandler),
+                                  (r'/plan/(.*)', PlanHandler)
                               ], debug=True)
 
