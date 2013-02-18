@@ -7,6 +7,8 @@ app = webapp2.WSGIApplication([
                                   ('/', MainHandler),
                                   (r'/user/(.*)', ProfileHandler),
                                   (r'/edit/(.*)', EditHandler),
-                                  (r'/plan/(.*)', PlanHandler)
+                                  (r'/plan/(.*)', PlanHandler),
+                                  (r'/find/(.*)', FindHandler),
+                                  (r'/bookmarks/(.*)', BookmarksHandler)
                               ], debug=True)
 

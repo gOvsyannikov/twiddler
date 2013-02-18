@@ -12,6 +12,9 @@ handlers:
 - url: .*
   script: main.app
 
+- url: /assets
+  static_dir: assets
+
 libraries:
 - name: webapp2
   version: latest

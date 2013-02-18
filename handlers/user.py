@@ -10,7 +10,6 @@ class MainHandler(webapp2.RequestHandler):
 
         if user:
             mas_users = MyUser.all().fetch(200)
-            print len(mas_users)
 
             for temp_user in mas_users:
                 if user.user_id() == temp_user.login:
@@ -170,29 +169,108 @@ class ProfileHandler(webapp2.RequestHandler):
 
         if not curr_user.user_id() == user.login:
             mark = False
+        
+        mas_users = MyUser.all().fetch(200)
+        for temp_user in mas_users:
+            if temp_user.login == curr_user.user_id():
+                c_user = temp_user
+                break
+
+        mark2 = False
+        for usr in c_user.bookmarks:
+            t_id = try_fetch(usr, int)
+            u = MyUser.get_by_id(t_id)
+            if u.login == user.login:
+                mark2 = True
+                break
 
         template_values = {
             'user' : user,
             'user_id' : user_id,
-            'mark' : mark
+            'mark' : mark,
+            'mark2' : mark2
         }
+
         template = main.jinja_environment.get_template('templates/profile.html')
         self.response.out.write(template.render(template_values))
 
     def post(self, user_id):
+
+        tid = try_fetch(user_id, int)
+        if not tid:
+            self.response.set_status(401)
+            return
+        user = MyUser.get_by_id(tid)
+        if not user:
+            self.response.set_status(401)
+            return
+
+        curr_user = users.get_current_user()
+
+        if not curr_user:
+            self.response.set_status(401)
+            return
+
+        mas_users = MyUser.all().fetch(200)
+        for temp_user in mas_users:
+            if temp_user.login == curr_user.user_id():
+                c_user = temp_user
+                break
+        
+        mark2 = False
+        for usr in c_user.bookmarks:
+            t_id = try_fetch(usr, int)
+            u = MyUser.get_by_id(t_id)
+            if u.login == user.login:
+                mark2 = True
+                break
+        if not mark2:
+            c_user.bookmarks.append(str(tid))
+        else:
+            c_user.bookmarks.remove(str(tid))
+        c_user.put()
+        self.redirect('/user/' + str(user_id))
+
+        # user.delete()
+        # self.redirect(users.create_logout_url("/"))
+
+class BookmarksHandler(webapp2.RequestHandler):
+    def get(self, user_id):
+        curr_user = users.get_current_user()
+        mark = True
+
         tid = try_fetch(user_id, int)
         if not tid:
             self.response.set_status(401)
             return
 
         user = MyUser.get_by_id(tid)
-
         if not user:
             self.response.set_status(401)
             return
 
-        user.delete()
-        self.redirect(users.create_logout_url("/"))
+        if not curr_user.user_id() == user.login:
+            self.response.set_status(401)
+            return
+
+        bookmark_list = user.bookmarks
+        user_list = []
+
+        for s in bookmark_list:
+            num = try_fetch(s, int)
+            t_user = MyUser.get_by_id(num)
+            t_user._id = t_user.key().id()
+            user_list.append(t_user)
+
+        template_values = {
+            'user' : user,
+            'user_id' : user_id,
+            'user_list' : user_list
+        }
+
+        template = main.jinja_environment.get_template('templates/bookmarks.html')
+        self.response.out.write(template.render(template_values))
+
 
 class PlanHandler(webapp2.RequestHandler):
     def get(self, user_id):
@@ -294,3 +372,55 @@ def try_fetch(x, t):
     except:
         return None
 
+class FindHandler(webapp2.RequestHandler):
+    def get(self, user_id):
+        curr_user = users.get_current_user()
+        tid = try_fetch(user_id, int)
+        if not tid:
+            self.response.set_status(401)
+            return
+
+        user = MyUser.get_by_id(tid)
+
+        if not user:
+            self.response.set_status(401)
+            return
+
+        mark = True
+        if not curr_user.user_id() == user.login:
+            mark = False
+
+        location = user.location
+
+        template_values = {
+            'mark' : mark,
+            'last_seen' : location
+        }
+
+        template = main.jinja_environment.get_template('/templates/find.html')
+        self.response.out.write(template.render(template_values))
+
+    def post(self, user_id):
+        tid = try_fetch(user_id, int)
+        
+        if not tid:
+            self.response.set_status(401)
+            return
+        
+        user = MyUser.get_by_id(tid)
+
+        if not user:
+            self.response.set_status(401)
+            return
+
+        lat = self.request.get('lat')
+        lon = self.request.get('lon')
+
+        latI = try_fetch(lat, float)
+        lonI = try_fetch(lon, float)
+
+        if latI and lonI and abs(latI) <= 90 and abs(lonI) <= 180:
+            user.location = lat + ',' + lon #db.GeoPtProperty(latI, lonI)
+
+        user.put()
+        self.redirect(str(user_id))

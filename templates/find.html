@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+    {% if last_seen is not none %}
+    <script type="text/javascript">
+        var myMap;
+        ymaps.ready(function () {
+        myMap = new ymaps.Map("YMapsID", {
+            center: [{{ last_seen.lat }}, {{ last_seen.lon }}],
+            zoom: 8
+        });
+    });
+    </script>
+    {% else %}
+    <script type="text/javascript">
+        var myMap;
+        ymaps.ready(function () {
+        myMap = new ymaps.Map("YMapsID", {
+            center: [55.75, 37.45],
+            zoom: 8
+        });
+    });
+    </script>
+    {% endif %}
+</head>
+<body>
+	<div id="YMapsID" style="width: 450px; height: 350px;">
+        <form method = "POST">
+            {% if last_seen is not none %}
+                <div>
+                    {% if mark %}
+                    <h2><i>Последний раз Вы были:</i></h2>
+                    {% else %}
+                    <h2><i>Последний раз Пользователь был:</i></h2>
+                    {% endif %}
+                </div>
+                <div>
+                    <input size = "11" type = text name = "lat" value = {{ last_seen.lat }} disabled />
+                    <input size = "11" type = text name = "lon" value = {{ last_seen.lon }} disabled />
+                </div>
+            {% endif %}
+            {% if mark %}
+            <div>
+                <h2><i>Ваши координаты:</i></h2>
+            </div>
+            <div>
+                <input size = "11" type = text name = "lat" placeholder = "Введите широту" required />
+                <input size = "11" type = text name = "lon" placeholder = "Введите долготу" required />
+            </div>
+            <div>
+                <button style = "width:210px">Запомнить</button>
+            </div>
+            {% endif %}
+        </form>
+</body>
+</html>

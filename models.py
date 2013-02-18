@@ -18,6 +18,7 @@ class MyUser(db.Model):
     plan = db.StringListProperty(default=[])
     image = db.StringProperty()
     _id = db.IntegerProperty()
+    bookmarks = db.StringListProperty(default=[])
 
 class MyEvent(db.Model):
     login = db.StringProperty()

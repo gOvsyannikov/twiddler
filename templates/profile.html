@@ -60,6 +60,19 @@
     <form action="/edit/{{ user_id }}">
         <div><input type="submit" value="Изменить"></div>
     </form>
+    <form action="/bookmarks/{{ user_id }}">
+        <div><input type="submit" value="Мои закладки"></div>
+    </form>
+    {% else %}
+        {% if not mark2 %}
+        <form method="POST" action="/user/{{ user_id }}">
+            <div><input type="submit" value="Добавить в закладки"></div>
+        </form>
+        {% else %}
+        <form method="POST" action="/user/{{ user_id }}">
+            <div><input type="submit" value="Удалить из закладок"></div>
+        </form>
+        {% endif %}
     {% endif %}
     <form action="/">
         <div><input type="submit" value="На главную"></div>

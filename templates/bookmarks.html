@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <title>WTF</title>
+<style>
+</style>
+</head>
+<body>
+<div class="container">
+	<table>
+        <tr>
+            <td>#</td>
+            <td>First Name</td>
+            <td>last Name</td>
+            <td>VK link</td>
+        </tr>
+        {% for U in user_list %}
+        <tr>
+        	<td><a href="/user/{{ U._id }}">{{ U._id }}</a></td>
+        	<td>{{ U.name }}</td>
+        	<td>{{ U.surname }}</td>
+        	{% if U.vk_id is not none %}
+        	<td><a href="http://vk.com/{{ U.vk_id }}">{{ U.vk_id }}</a></td>
+        	{% else %}
+        	<td>None</td>
+        	{% endif %}
+        </tr>
+        {% endfor %}
+	</table>
+</div>
+</body>
+</html> 
