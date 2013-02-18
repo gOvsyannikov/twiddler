@@ -3,133 +3,105 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <TITLE>Изменить</TITLE>
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
 </head>
-<body>
+<body style="background-image:url(/back.jpg)">
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Twiddler</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="divider-vertical"></li>
+                    <li><a href="/user/{{ user_id }}">Профиль</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/plan/{{ user_id }}">Спланировать</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/logout">Выйти</a></li>
+                </ul>
+                <form method="POST" class="navbar-form pull-right" action="/search">
+                    <input type="text" class="span2" placeholder="Search">
+                    <!-- button type="submit" class="btn">Найти</button -->
+                </form>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+
+<div class="container">
 <h1>Редактировать профиль</h1>
-<div> 
     <form method="POST">
-        <div>
+        <div class="row-fluid">
             {% if user.name is none %}
-                {% if mark %}
-                <input type="text" size="21" name="name" placeholder="Имя" required/>
-                {% else %}
-                <input type="text" size="21" name="name" placeholder="Имя" disabled required/>
-                {% endif %}
+                <input type="text" class="span3" name="name" placeholder="Имя" required/>
             {% else %}
-                {% if mark %}
-                <input type="text" size="21" name="name" value={{user.name}} placeholder="Имя" required/>
-                {% else %}
-                <input type="text" size="21" name="name" value={{user.name}} placeholder="Имя" disabled required/>
-                {% endif %}
+                <input type="text" class="span3" name="name" value={{user.name}} placeholder="Имя" required/>
             {% endif %}
 
             {% if user.surname is none %}
-                {% if mark %}
-                <input type="text" size="21" name="surname" placeholder="Фамилия" />
-                {% else %}
-                <input type="text" size="21" name="surname" placeholder="Фамилия" disabled />
-                {% endif %}
+                <input type="text" class="span3" name="surname" placeholder="Фамилия" />
             {% else %}
-                {% if mark %}
-                <input type="text" size="21" name="surname" value={{user.surname}} placeholder="Фамилия" />
-                {% else %}
-                <input type="text" size="21" name="surname" value={{user.surname}} placeholder="Фамилия" disabled />
-                {% endif %}
+                <input type="text" class="span3" name="surname" value={{user.surname}} placeholder="Фамилия" />
             {% endif %}
+        </div>
 
-            {% if user.birthday is none %}
-                {% if mark %}
-                <input type="date" name="birthday" placeholder="Возраст" />
-                {% else %}
-                <input type="date" name="birthday" placeholder="Возраст" disabled />
-                {% endif %}
-            {% else %}
-                {% if mark %}
-                <input type="date" name="birthday" value={{user.birthday}} placeholder="Возраст" />
-                {% else %}
-                <input type="date" name="birthday" value={{user.birthday}} placeholder="Возраст" disabled />
-                {% endif %}
-            {% endif %}
-		</div>
-        <div>
+        <div class="row-fluid">
             {% if user.email is none %}
-                {% if mark %}
-                <input type="text" name="email" size="34" placeholder="E-Mail" required/>
-                {% else %}
-                <input type="text" name="email" size="34" placeholder="E-Mail" disabled required/>
-                {% endif %}
+                <input type="text" class="span2" name="email" placeholder="E-Mail" required/>
             {% else %}
-                {% if mark %}
-                <input type="text" name="email" size="34" value={{user.email}} placeholder="E-Mail" required/>
-                {% else %}
-                <input type="text" name="email" size="34" value={{user.email}} placeholder="E-Mail" disabled required/>
-                {% endif %}
+                <input type="text" class="span2" name="email" value={{user.email}} placeholder="E-Mail" required/>
             {% endif %}
 
             {% if user.phone is none %}
-                {% if mark %}
-                <input type="text" name="phone" size="34" placeholder="Телефон" />
-                {% else %}
-                <input type="text" name="phone" size="34" placeholder="Телефон" disabled />
-                {% endif %}
+                <input type="text" class="span2" name="phone" placeholder="Телефон" />
             {% else %}
-                {% if mark %}
-                <input type="text" name="phone" size="34" value={{user.phone}} placeholder="Телефон" />
-                {% else %}
-                <input type="text" name="phone" size="34" value={{user.phone}} placeholder="Телефон" disabled />
-                {% endif %}
-            {% endif %}
-        </div>
-		<div>
-            {% if user.vk_id is none %}
-                {% if mark %}
-                <input type="text" name="vk" size="34" placeholder="VKontakte (durov, id785465)" />
-                {% else %}
-                <input type="text" name="vk" size="34" placeholder="VKontakte (durov, id785465)" disabled />
-                {% endif %}
-            {% else %}
-                {% if mark %}
-                <input type="text" name="vk" size="34" value={{user.vk_id}} placeholder="VKontakte (durov, id785465)" />
-                {% else %}
-                <input type="text" name="vk" size="34" value={{user.vk_id}} placeholder="VKontakte (durov, id785465)" disabled />
-                {% endif %}
-            {% endif %}
-            {% if user.fb_id is none %}
-                {% if mark %}
-                <input type="text" name="fb" size="34" placeholder="Facebook (DrDre, profile.php?id=1809)" />
-                {% else %}
-                <input type="text" name="fb" size="34" placeholder="Facebook (DrDre, profile.php?id=1809)" disabled />
-                {% endif %}
-            {% else %}
-                {% if mark %}
-                <input type="text" name="fb" size="34" value={{user.fb_id}} placeholder="Facebook (DrDre, profile.php?id=1809)" />
-                {% else %}
-                <input type="text" name="fb" size="34" value={{user.fb_id}} placeholder="Facebook (DrDre, profile.php?id=1809)" disabled />
-                {% endif %}
+                <input type="text" class="span2" name="phone" value={{user.phone}} placeholder="Телефон" />
             {% endif %}
 
-        </div>
-		<div>
-            {% if user.info is none %}
-                {% if mark %}
-                <textarea rows="4" cols="57" name="info" placeholder="Информация о себе"></textarea>
-                {% else %}
-                <textarea rows="4" cols="57" name="info" placeholder="Информация о себе" disabled></textarea>
-                {% endif %}
+            {% if user.birthday is none %}
+            <input type="date" class="span2" name="birthday" placeholder="Возраст" />
             {% else %}
-                {% if mark %}
-                <textarea rows="4" cols="57" name="info" placeholder="Информация о себе">{{user.info}}</textarea>
-                {% else %}
-                <textarea rows="4" cols="57" name="info" placeholder="Информация о себе" disabled>{{user.info}}</textarea>
-                {% endif %}
+            <input type="date" class="span2" name="birthday" value={{user.birthday}} placeholder="Возраст" />
             {% endif %}
         </div>
-        {% if mark %}
-        <div><input type="submit" value="Изменить" /></div>
-        {% endif %}
-    </form>
-    <form action="/user/{{ user_id }}">
-        <div><input type="submit" value="Назад"></div>
+
+        <div class="row-fluid">
+            {% if user.vk_id is none %}
+                <input type="text" class="span3" name="vk" placeholder="VKontakte (durov, id785465)" />
+            {% else %}
+                <input type="text" class="span3" name="vk" value={{user.vk_id}} placeholder="VKontakte (durov, id785465)" />
+            {% endif %}
+
+            {% if user.fb_id is none %}
+                <input type="text" class="span3" name="fb" placeholder="Facebook (DrDre, profile.php?id=1809)" />
+            {% else %}
+                <input type="text" class="span3" name="fb" value={{user.fb_id}} placeholder="Facebook (DrDre, profile.php?id=1809)" />
+            {% endif %}
+        </div>
+
+        <div class="row-fluid">
+            {% if user.info is none %}
+                <textarea class="span6" name="info" placeholder="Информация о себе"></textarea>
+            {% else %}
+                <textarea class="span6" name="info" placeholder="Информация о себе">{{user.info}}</textarea>
+            {% endif %}
+        </div>
+        <input class="btn btn-primary" type="submit" value="Изменить"/>
+        <a class="btn" href="/user/{{ user_id }}">Назад</a>
     </form>
 </div>
 </body>

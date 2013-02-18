@@ -1,5 +1,5 @@
 application: mytwiddler
-version: 12
+version: 13
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -9,11 +9,18 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
+- url: /stylesheets
+  static_dir: stylesheets
+
+- url: /bootstrap
+  static_dir: bootstrap
+
+- url: /back\.jpg
+  static_files: back.jpg
+  upload: back\.jpg
+
 - url: .*
   script: main.app
-
-- url: /assets
-  static_dir: assets
 
 libraries:
 - name: webapp2

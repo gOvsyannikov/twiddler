@@ -3,79 +3,114 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <TITLE>Профиль</TITLE>
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
 </head>
-<body>
-<h1>Профиль</h1>
-<table border="0" >
-    {% if user.name is not none %}
-    <tr>
-        <td><b>Имя</b></td>
-        <td>{{ user.name }}</td>
-    </tr>
-    {% endif %}
-    {% if user.surname is not none %}
-    <tr>
-        <td><b>Фамилия</b></td>
-        <td>{{ user.surname }}</td>
-    </tr>
-    {% endif %}
-    {% if user.age is not none %}
-    <tr>
-        <td><b>Возраст</b></td>
-        <td>{{ user.age }}</td>
-    </tr>
-    {% endif %}
-    {% if user.email is not none %}
-    <tr>
-        <td><b>E-Mail</b></td>
-        <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
-    </tr>
-    {% endif %}
-    {% if user.phone is not none %}
-    <tr>
-        <td><b>Телефон</b></td>
-        <td>{{ user.phone }}</td>
-    </tr>
-    {% endif %}
-    {% if user.vk_id is not none %}
-    <tr>
-        <td><b>VK</b></td>
-        <td><a href="http://vk.com/{{ user.vk_id }}">{{ user.vk_id }}</a></td>
-    </tr>
-    {% endif %}
-    {% if user.fb_id is not none %}
-    <tr>
-        <td><b>FB</b></td>
-        <td><a href="http://www.facebook.com/{{ user.fb_id }}">{{ user.fb_id }}</a></td>
-    </tr>
-    {% endif %}
-    {% if user.info is not none %}
-    <tr>
-        <td><b>Информация</b></td>
-        <td>{{ user.info }}</td>
-    </tr>
-    {% endif %}
-</table>
-    {% if mark %}
-    <form action="/edit/{{ user_id }}">
-        <div><input type="submit" value="Изменить"></div>
-    </form>
-    <form action="/bookmarks/{{ user_id }}">
-        <div><input type="submit" value="Мои закладки"></div>
-    </form>
-    {% else %}
-        {% if not mark2 %}
-        <form method="POST" action="/user/{{ user_id }}">
-            <div><input type="submit" value="Добавить в закладки"></div>
-        </form>
+<body style="background-image:url(/back.jpg)">
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Twiddler</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="divider-vertical"></li>
+                    <li><a href="/user/{{ user_id }}">Профиль</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/plan/{{ user_id }}">Спланировать</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/logout">Выйти</a></li>
+                </ul>
+                <form method="POST" class="navbar-form pull-right" action="/search">
+                    <input type="text" class="span2" placeholder="Search">
+                    <!-- button type="submit" class="btn">Найти</button -->
+                </form>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h1>Профиль</h1>
+    <table border="0" >
+        {% if user.name is not none %}
+        <tr>
+            <td><b>Имя</b></td>
+            <td>{{ user.name }}</td>
+        </tr>
+        {% endif %}
+        {% if user.surname is not none %}
+        <tr>
+            <td><b>Фамилия</b></td>
+            <td>{{ user.surname }}</td>
+        </tr>
+        {% endif %}
+        {% if user.age is not none %}
+        <tr>
+            <td><b>Возраст</b></td>
+            <td>{{ user.age }}</td>
+        </tr>
+        {% endif %}
+        {% if user.email is not none %}
+        <tr>
+            <td><b>E-Mail</b></td>
+            <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+        </tr>
+        {% endif %}
+        {% if user.phone is not none %}
+        <tr>
+            <td><b>Телефон</b></td>
+            <td>{{ user.phone }}</td>
+        </tr>
+        {% endif %}
+        {% if user.vk_id is not none %}
+        <tr>
+            <td><b>VK</b></td>
+            <td><a href="http://vk.com/{{ user.vk_id }}">{{ user.vk_id }}</a></td>
+        </tr>
+        {% endif %}
+        {% if user.fb_id is not none %}
+        <tr>
+            <td><b>FB</b></td>
+            <td><a href="http://www.facebook.com/{{ user.fb_id }}">{{ user.fb_id }}</a></td>
+        </tr>
+        {% endif %}
+        {% if user.info is not none %}
+        <tr>
+            <td><b>Информация</b></td>
+            <td>{{ user.info }}</td>
+        </tr>
+        {% endif %}
+    </table>
+    <p>
+        {% if mark %}
+        <a class="btn btn-primary" href="/edit">Изменить</a>
+        <a class="btn" href="/bookmarks/{{ user_id }}">Мои закладки</a>
         {% else %}
-        <form method="POST" action="/user/{{ user_id }}">
-            <div><input type="submit" value="Удалить из закладок"></div>
+        <form method="POST">
+            {% if not mark2 %}
+                <input class="btn btn-primary" type="submit" value="Добавить в закладки"/>
+            {% else %}
+                <input class="btn btn-primary" type="submit" value="Удалить из закладок"/>
+            {% endif %}
+            <a class="btn" href="/">На главную</a>
         </form>
         {% endif %}
-    {% endif %}
-    <form action="/">
-        <div><input type="submit" value="На главную"></div>
-    </form>
+    </p>
+</div>
+
+
 </body>
 </html>

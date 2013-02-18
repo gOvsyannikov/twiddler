@@ -24,24 +24,58 @@
     });
     </script>
     {% endif %}
+    <TITLE>Twiddler</TITLE>
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
+
 </head>
-<body>
+<body style="background-image:url(/back.jpg)">
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Twiddler</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="divider-vertical"></li>
+                    <li><a href="/user/{{ user_id }}">Профиль</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/plan/{{ user_id }}">Спланировать</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/logout">Выйти</a></li>
+                </ul>
+                <form method="POST" class="navbar-form pull-right" action="/search">
+                    <input type="text" class="span2" placeholder="Search">
+                    <!-- button type="submit" class="btn">Найти</button -->
+                </form>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+
+<div class="container">
 	<div id="YMapsID" style="width: 450px; height: 350px;">
         <form method = "POST">
             {% if last_seen is not none %}
                 <div>
-                    {% if mark %}
                     <h2><i>Последний раз Вы были:</i></h2>
-                    {% else %}
-                    <h2><i>Последний раз Пользователь был:</i></h2>
-                    {% endif %}
                 </div>
                 <div>
                     <input size = "11" type = text name = "lat" value = {{ last_seen.lat }} disabled />
                     <input size = "11" type = text name = "lon" value = {{ last_seen.lon }} disabled />
                 </div>
             {% endif %}
-            {% if mark %}
             <div>
                 <h2><i>Ваши координаты:</i></h2>
             </div>
@@ -52,7 +86,8 @@
             <div>
                 <button style = "width:210px">Запомнить</button>
             </div>
-            {% endif %}
         </form>
+    </div>
+</div>
 </body>
 </html>
