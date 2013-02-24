@@ -11,6 +11,9 @@
             center: [{{ last_seen.lat }}, {{ last_seen.lon }}],
             zoom: 8
         });
+        myMap.controls.add('typeSelector');
+        myMap.controls.add('searchControl');
+        myMap.controls.add('zoomControl');
     });
     </script>
     {% else %}
@@ -21,6 +24,9 @@
             center: [55.75, 37.45],
             zoom: 8
         });
+        myMap.controls.add('typeSelector');
+        myMap.controls.add('searchControl');
+        myMap.controls.add('zoomControl');
     });
     </script>
     {% endif %}
@@ -65,7 +71,7 @@
 </div>
 
 <div class="container">
-	<div id="YMapsID" style="width: 450px; height: 350px;">
+	<div id="YMapsID" style="width: 550px; height: 450px;">
         <form method = "POST">
             {% if last_seen is not none %}
                 <div>
