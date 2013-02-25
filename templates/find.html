@@ -9,7 +9,7 @@
         ymaps.ready(function () {
         myMap = new ymaps.Map("YMapsID", {
             center: [{{ last_seen.lat }}, {{ last_seen.lon }}],
-            zoom: 8
+            zoom: 7
         });
     });
     </script>
@@ -51,7 +51,9 @@
                     <li class="divider-vertical"></li>
                     <li><a href="/user/{{ user_id }}">Профиль</a></li>
                     <li class="divider-vertical"></li>
-                    <li><a href="/plan/{{ user_id }}">Спланировать</a></li>
+                    <li><a href="/plan">Спланировать</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/bookmarks">Закладки</a></li>
                     <li class="divider-vertical"></li>
                     <li><a href="/logout">Выйти</a></li>
                 </ul>
@@ -64,29 +66,30 @@
     </div>
 </div>
 
-<div class="container">
-	<div id="YMapsID" style="width: 450px; height: 350px;">
-        <form method = "POST">
-            {% if last_seen is not none %}
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span4">
+            Тут будет информация, например
+        </div>
+        <div class="span8">
+            <div id="YMapsID" style="width: 450px; height: 350px;"></div>
+            <form method = "POST">
+                {% if last_seen is not none %}
                 <div>
-                    <h2><i>Последний раз Вы были:</i></h2>
+                    <h4>Последний раз Вы были: {{ last_seen.lat }}, {{ last_seen.lon }}</h4>
+                </div>
+
+                {% endif %}
+                <div>
+                    <h4>Ваши координаты:</h4>
+                    <input class="input" type=text name="lat" placeholder = "Широта" required/>
+                    <input class="input" type=text name="lon" placeholder = "Долгота" required/>
                 </div>
                 <div>
-                    <input size = "11" type = text name = "lat" value = {{ last_seen.lat }} disabled />
-                    <input size = "11" type = text name = "lon" value = {{ last_seen.lon }} disabled />
+                    <input class="btn btn-primary" type="submit" value="Изменить" />
                 </div>
-            {% endif %}
-            <div>
-                <h2><i>Ваши координаты:</i></h2>
-            </div>
-            <div>
-                <input size = "11" type = text name = "lat" placeholder = "Введите широту" required />
-                <input size = "11" type = text name = "lon" placeholder = "Введите долготу" required />
-            </div>
-            <div>
-                <button style = "width:210px">Запомнить</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 </body>

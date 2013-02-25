@@ -16,12 +16,12 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 
 <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+                <div class="navbar-inner">
+                    <div class="container">
+                        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
             </button>
             <a class="brand" href="/">Twiddler</a>
             <div class="nav-collapse collapse">
@@ -29,7 +29,9 @@
                     <li class="divider-vertical"></li>
                     <li><a href="/user/{{ user_id }}">Профиль</a></li>
                     <li class="divider-vertical"></li>
-                    <li><a href="/plan/{{ user_id }}">Спланировать</a></li>
+                    <li><a href="/plan">Спланировать</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/bookmarks">Закладки</a></li>
                     <li class="divider-vertical"></li>
                     <li><a href="/logout">Выйти</a></li>
                 </ul>
@@ -97,7 +99,6 @@
     <p>
         {% if mark %}
         <a class="btn btn-primary" href="/edit">Изменить</a>
-        <a class="btn" href="/bookmarks/{{ user_id }}">Мои закладки</a>
         {% else %}
         <form method="POST">
             {% if not mark2 %}
@@ -105,7 +106,6 @@
             {% else %}
                 <input class="btn btn-primary" type="submit" value="Удалить из закладок"/>
             {% endif %}
-            <a class="btn" href="/">На главную</a>
         </form>
         {% endif %}
     </p>

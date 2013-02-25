@@ -2,80 +2,105 @@
 <html>
 <head>
     <title>Спланировать</title>
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     <style type="text/css">
-        #tab{
-            width:100%;
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
         }
-        #l {
-            margin-left: 100px;
-        }
-        #r {
-            margin-left: 10px;
-            margin-right: 100px;
+        .row-fluid {
+            padding-left: 80px;
         }
     </style>
 </head>
-<body>
-<table border="0" id="tab">
-    <tr>
-        <td id="l">
-        <table border="0" >
+<body style="background-image:url(/back.jpg)">
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Twiddler</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="divider-vertical"></li>
+                    <li><a href="/user/{{ user_id }}">Профиль</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/plan">Спланировать</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/bookmarks">Закладки</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/logout">Выйти</a></li>
+                </ul>
+                <form method="POST" class="navbar-form pull-right" action="/search">
+                    <input type="text" class="span2" placeholder="Search">
+                    <!-- button type="submit" class="btn">Найти</button -->
+                </form>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span5">
+            <h1>Мои события</h1>
             {% for plan in plan_list %}
-            <tr>
-                <td><h3>{{ plan.name }}</h3></td>
-            </tr>
-            <tr>
-                <td><b>Начало</b></td>
-                <td>{{ plan.start }}</td>
-            </tr>
-            <tr>
-                <td><b>Конец</b></td>
-                <td>{{ plan.end }}</td>
-            </tr>
-            <tr>
-                <td><b>Статус</b></td>
-                <td>{{ plan.status }}</td>
-            </tr>
-            <tr>
-                <td><b>Описание</b></td>
-                <td>{{ plan.info }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        </td>
-        <td id="r">
-            <form method="POST">
-                <table border="0" >
-                    <tr>
-                        <td><input type="text" size="21" name="name" placeholder="Название" required/></td>
-                    </tr>
-                    <tr>
-                        <td><b>Начало</b></td>
-                        <td><input type="date" name="start_date" required/></td>
-                        <td><input type="time" name="start_time" required/></td>
-                    </tr>
-                    <tr>
-                        <td><b>Конец</b></td>
-                        <td><input type="date" name="end_date" required/></td>
-                        <td><input type="time" name="end_time" required/></td>
-                    </tr>
-                    <tr>
-                        <td><b>Статус</b></td>
-                        <td>
-                            <input type="radio" name="status" value="1" />1
-                            <input type="radio" name="status" value="2" />2
-                            <input type="radio" name="status" value="3" />3
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><b>Описание</b></td>
-                        <td><textarea rows="4" cols="20" name="info" placeholder="Информация о событии" ></textarea></td>
-                    </tr>
-                </table>
-                <input type="submit" value="Добавить" />
+            <h3>{{ plan.name }}</h3><p>
+            <b>Начало:</b> {{ plan.start }}<p>
+            <b>Конец:</b> {{ plan.end }}<p>
+            <b>Статус:</b> {{ plan.status }}<p>
+            <b>Описание:</b> {{ plan.info }}<p>
+            <form action="/plan/{{ user_id }}">
+                <input class="btn btn-small" type="submit" value="Удалить событие"/>
             </form>
-        </td>
-    </tr>
-</table>
+            {% endfor %}
+        </div>
+        <div class="span7">
+            <h3>Добавить событие</h3>
+            <form method="POST">
+                    <input class="input-xlarge" type="text" size="21" name="name" placeholder="Название" required/><p>
+            <table>
+                <tr>
+                    <td><b>Начало</b></td>
+                    <td><input class="input-small" type="date" name="start_date" required/>
+                    <input class="input-mini" type="time" name="start_time" required/></td>
+                </tr>
+
+                <tr>
+                    <td><b>Конец</b></td>
+                    <td><input class="input-small" type="date" name="end_date" required/>
+                    <input class="input-mini"type="time" name="end_time" required/></td>
+                </tr>
+
+                <tr>
+                    <td><b>Статус</b></td>
+                    <td>
+                    <label class="radio inline">
+                        <input type="radio" name="status" id="status1" value="1" checked>1
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="status" id="status2" value="2">2
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="status" id="status3" value="3">3
+                    </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Описание</b></td>
+                    <td><textarea rows="4" cols="20" name="info" placeholder="Информация о событии" ></textarea></td>
+                <tr>
+            </table>
+                <input class="btn btn-primary" type="submit" value="Добавить" />
+            </form>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

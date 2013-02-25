@@ -3,31 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <title>Закладки</title>
+    <TITLE>Закладки</TITLE>
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
 <style>
 </style>
 </head>
-<body>
+<body style="background-image:url(/back.jpg)">
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+
+<div class="navbar navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Twiddler</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="divider-vertical"></li>
+                    <li><a href="/user/{{ user_id }}">Профиль</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/plan">Спланировать</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/bookmarks">Закладки</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/logout">Выйти</a></li>
+                </ul>
+                <form method="POST" class="navbar-form pull-right" action="/search">
+                    <input type="text" class="span2" placeholder="Search">
+                    <!-- button type="submit" class="btn">Найти</button -->
+                </form>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+
 <div class="container">
-	<table>
-        <tr>
-            <td>#</td>
-            <td>First Name</td>
-            <td>last Name</td>
-            <td>VK link</td>
-        </tr>
+	<table class="table table-hover">
+        <thead>
+            <td>Имя</td>
+            <td>Email</td>
+            <td>VK</td>
+            <td>Телефон</td>
+        </thead>
+        <tbody>
         {% for U in user_list %}
         <tr>
-        	<td><a href="/user/{{ U._id }}">{{ U._id }}</a></td>
-        	<td>{{ U.name }}</td>
-        	<td>{{ U.surname }}</td>
+            {% if U.surname is not none %}
+            <td><a href="/user/{{ U._id }}">{{ U.name }} {{ U.surname }}</a></td>
+            {% else %}
+            <td><a href="/user/{{ U._id }}">{{ U.name }}</a></td>
+            {% endif %}
+            <td><a href="mailto:{{ U.email }}">{{ U.email }}</a></td>
         	{% if U.vk_id is not none %}
         	<td><a href="http://vk.com/{{ U.vk_id }}">{{ U.vk_id }}</a></td>
         	{% else %}
-        	<td>None</td>
+        	<td>-</td>
         	{% endif %}
+            {% if U.phone is not none %}
+            <td>{{ U.phone }}</td>
+            {% else %}
+            <td>-</td>
+            {% endif %}
         </tr>
         {% endfor %}
+        </tbody>
 	</table>
 </div>
 </body>
