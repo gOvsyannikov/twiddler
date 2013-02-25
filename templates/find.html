@@ -11,9 +11,6 @@
             center: [{{ last_seen.lat }}, {{ last_seen.lon }}],
             zoom: 7
         });
-        myMap.controls.add('typeSelector');
-        myMap.controls.add('searchControl');
-        myMap.controls.add('zoomControl');
     });
     </script>
     {% else %}
@@ -24,9 +21,6 @@
             center: [55.75, 37.45],
             zoom: 8
         });
-        myMap.controls.add('typeSelector');
-        myMap.controls.add('searchControl');
-        myMap.controls.add('zoomControl');
     });
     </script>
     {% endif %}
@@ -72,7 +66,6 @@
     </div>
 </div>
 
-<<<<<<< HEAD
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span4">
@@ -82,12 +75,6 @@
             <div id="YMapsID" style="width: 450px; height: 350px;"></div>
             <form method = "POST">
                 {% if last_seen is not none %}
-=======
-<div class="container">
-	<div id="YMapsID" style="width: 550px; height: 450px;">
-        <form method = "POST">
-            {% if last_seen is not none %}
->>>>>>> edf7534e7f6e0df8a96409b24982e2be2ded0809
                 <div>
                     <h4>Последний раз Вы были: {{ last_seen.lat }}, {{ last_seen.lon }}</h4>
                 </div>

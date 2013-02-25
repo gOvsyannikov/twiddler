@@ -55,7 +55,7 @@
             <b>Конец:</b> {{ plan.end }}<p>
             <b>Статус:</b> {{ plan.status }}<p>
             <b>Описание:</b> {{ plan.info }}<p>
-            <form action="/plan/{{ user_id }}">
+            <form action="/plan/{{ plan._id }}">
                 <input class="btn btn-small" type="submit" value="Удалить событие"/>
             </form>
             {% endfor %}

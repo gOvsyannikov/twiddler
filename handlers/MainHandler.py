@@ -66,6 +66,13 @@ class MainHandler(webapp2.RequestHandler):
         my_user.put()
         self.redirect("/")
 
+    def post(self, code):
+        if code != 'change':
+            return
+
+        self.redirect("/user")
+
+
 class LogoutHandler(webapp2.RequestHandler):
     def get(self):
         self.redirect(users.create_logout_url("/"))
