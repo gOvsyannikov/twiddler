@@ -2,28 +2,73 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEyZ-WHNVSvtv5X9eDo353TOlSpucMh0k&v=3.exp&sensor=true"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script type="text/javascript">
     {% if last_seen is not none %}
-    <script type="text/javascript">
-        var myMap;
-        ymaps.ready(function () {
-        myMap = new ymaps.Map("YMapsID", {
-            center: [{{ last_seen.lat }}, {{ last_seen.lon }}],
-            zoom: 7
-        });
-    });
-    </script>
+      var map;
+      function initialize() {
+        var mapOptions = {
+          zoom: 8,
+          center: new google.maps.LatLng({{ last_seen.lat }}, {{ last_seen.lon }}),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById('map_canvas'),
+            mapOptions);
+        if(navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = new google.maps.LatLng({{ last_seen.lat }}, {{ last_seen.lon }});
+
+            $("#LAT").val(position.coords.latitude);
+            $("#LON").val(position.coords.longitude);
+
+            map.setCenter(pos);
+          }, function() {
+            $("#LAT").val('NaN');
+            $("#LON").val('NaN');
+            handleNoGeolocation(true);
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          $("#LAT").val('NaN');
+          $("#LON").val('NaN');
+          handleNoGeolocation(false);
+        }
+      }
+
+      function handleNoGeolocation(errorFlag) {
+        if (errorFlag) {
+          var content = 'Error: The Geolocation service failed.';
+        } else {
+          var content = 'Error: Your browser doesn\'t support geolocation.';
+        }
+
+        var options = {
+          map: map,
+          position: new google.maps.LatLng({{ last_seen.lat }}, {{ last_seen.lon }}),
+          content: content
+        };
+
+        map.setCenter(options.position);
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
     {% else %}
-    <script type="text/javascript">
-        var myMap;
-        ymaps.ready(function () {
-        myMap = new ymaps.Map("YMapsID", {
-            center: [55.75, 37.45],
-            zoom: 8
-        });
-    });
-    </script>
+      var map;
+      function initialize() {
+        var mapOptions = {
+          zoom: 8,
+          center: new google.maps.LatLng(55.45, 37.37),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById('map_canvas'),
+            mapOptions);
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
     {% endif %}
+    </script>
+    
     <TITLE>Twiddler</TITLE>
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
@@ -49,11 +94,9 @@
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li class="divider-vertical"></li>
-                    <li><a href="/user/{{ user_id }}">Профиль</a></li>
+                    <li><a href="/user/{{ user._id }}">Профиль</a></li>
                     <li class="divider-vertical"></li>
-                    <li><a href="/plan">Спланировать</a></li>
-                    <li class="divider-vertical"></li>
-                    <li><a href="/bookmarks">Закладки</a></li>
+                    <li><a href="/plan/{{ user._id }}">Спланировать</a></li>
                     <li class="divider-vertical"></li>
                     <li><a href="/logout">Выйти</a></li>
                 </ul>
@@ -66,31 +109,42 @@
     </div>
 </div>
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span4">
-            Тут будет информация, например
-        </div>
-        <div class="span8">
-            <div id="YMapsID" style="width: 450px; height: 350px;"></div>
-            <form method = "POST">
-                {% if last_seen is not none %}
-                <div>
-                    <h4>Последний раз Вы были: {{ last_seen.lat }}, {{ last_seen.lon }}</h4>
-                </div>
-
-                {% endif %}
-                <div>
-                    <h4>Ваши координаты:</h4>
-                    <input class="input" type=text name="lat" placeholder = "Широта" required/>
-                    <input class="input" type=text name="lon" placeholder = "Долгота" required/>
-                </div>
-                <div>
-                    <input class="btn btn-primary" type="submit" value="Изменить" />
-                </div>
-            </form>
-        </div>
+<div class="container">
+    <div id="map_canvas" style="width: 550px; height: 450px">
     </div>
+    <form method = "POST">
+        {% if last_seen is not none %}
+            <div>
+                <h2><i>Последний раз Вы были:</i></h2>
+            </div>
+            <div>
+                <input size = "11" type = text value = {{ last_seen.lat }} disabled />
+                <input size = "11" type = text value = {{ last_seen.lon }} disabled />
+            </div>
+        {% endif %}
+        <div>
+            <h2><i>Ваши текущие координаты:</i></h2>
+        </div>
+        <div id="current_pos" title="Если поле имеет значение NaN - не удалось определить Ваше местоположение. Используйте ручной ввод.">
+            <input type = text id = "LAT" size = "11" name = "lat" placeholder = "Введите широту" onclick="set1();" />
+            <input type = text id = "LON" size = "11" name = "lon" placeholder = "Введите долготу" onclick="set2();" />
+            <script type="text/javascript">
+              function set1() {
+                if ($('#LAT').val() == "NaN") {
+                  $('#LAT').val("");
+                }
+              }
+              function set2() {
+                if ($('#LON').val() == "NaN") {
+                  $('#LON').val("");
+                }
+              }
+            </script>
+        </div>
+        <div>
+            <button style = "width:210px">Запомнить</button>
+        </div>
+    </form>
 </div>
 </body>
 </html>

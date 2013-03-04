@@ -19,7 +19,7 @@ class MainHandler(webapp2.RequestHandler):
 
         template_values = {
             'last_seen' : my_user.location,
-            'user_id' : my_user._id
+            'user' : my_user
         }
         template = main.jinja_environment.get_template('/templates/find.html')
         self.response.out.write(template.render(template_values))
