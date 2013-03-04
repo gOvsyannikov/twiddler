@@ -4,7 +4,6 @@ from models import *
 
 class ProfileHandler(webapp2.RequestHandler):
     def get(self, user_id):
-
         curr_user = users.get_current_user()
         mark = True
 
@@ -14,6 +13,7 @@ class ProfileHandler(webapp2.RequestHandler):
             return
 
         user = MyUser.get_by_id(tid)
+        user._id = user.key().id()
 
         if not user:
             self.response.set_status(401)
@@ -22,20 +22,12 @@ class ProfileHandler(webapp2.RequestHandler):
         if not curr_user.user_id() == user.login:
             mark = False
 
-        mas_users = MyUser.all().fetch(200)
-        for temp_user in mas_users:
-            if temp_user.login == curr_user.user_id():
-                c_user = temp_user
-                c_user._id = c_user.key().id()
-                break
+        c_user = MyUser.all().filter('login', curr_user.user_id()).fetch(1)[0]
+        c_user._id = c_user.key().id()
 
         mark2 = False
-        for usr in c_user.bookmarks:
-            t_id = try_fetch(usr, int)
-            u = MyUser.get_by_id(t_id)
-            if u.login == user.login:
-                mark2 = True
-                break
+        if c_user.bookmarks.count(str(user._id)) > 0:
+            mark2 = True
 
         template_values = {
             'user' : user,
@@ -52,6 +44,8 @@ class ProfileHandler(webapp2.RequestHandler):
             self.response.set_status(401)
             return
         user = MyUser.get_by_id(tid)
+        user._id = user.key().id()
+
         if not user:
             self.response.set_status(401)
             return
@@ -62,19 +56,13 @@ class ProfileHandler(webapp2.RequestHandler):
             self.response.set_status(401)
             return
 
-        mas_users = MyUser.all().fetch(200)
-        for temp_user in mas_users:
-            if temp_user.login == curr_user.user_id():
-                c_user = temp_user
-                break
+        c_user = MyUser.all().filter('login', curr_user.user_id()).fetch(1)[0]
+        c_user._id = c_user.key().id()
 
         mark2 = False
-        for usr in c_user.bookmarks:
-            t_id = try_fetch(usr, int)
-            u = MyUser.get_by_id(t_id)
-            if u.login == user.login:
-                mark2 = True
-                break
+        if c_user.bookmarks.count(str(user._id)) > 0:
+            mark2 = True
+
         if not mark2:
             c_user.bookmarks.append(str(tid))
         else:
@@ -82,8 +70,6 @@ class ProfileHandler(webapp2.RequestHandler):
         c_user.put()
         self.redirect('/user/' + str(user_id))
 
-        # user.delete()
-        # self.redirect(users.create_logout_url("/"))
 
 def try_fetch(x, t):
     try:

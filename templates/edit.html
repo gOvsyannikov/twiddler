@@ -27,7 +27,7 @@
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li class="divider-vertical"></li>
-                    <li><a href="/user/{{ user_id }}">Профиль</a></li>
+                    <li><a href="/user/{{ user._id }}">Профиль</a></li>
                     <li class="divider-vertical"></li>
                     <li><a href="/plan">Спланировать</a></li>
                     <li class="divider-vertical"></li>
@@ -103,7 +103,7 @@
             {% endif %}
         </div>
         <input class="btn btn-primary" type="submit" value="Изменить"/>
-        <a class="btn" href="/user/{{ user_id }}">Назад</a>
+        <a class="btn" href="/user/{{ user._id }}">Назад</a>
     </form>
 </div>
 </body>

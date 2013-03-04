@@ -1,30 +1,24 @@
-import webapp2, main
+import webapp2
 from google.appengine.api import users
 from models import *
+
 
 class DeleteHandler(webapp2.RequestHandler):
     def get(self, event_id):
         user = users.get_current_user()
-        my_user = None
+        if not user:
+            self.redirect(users.create_login_url("/")); return
 
-        if user:
-            mas_users = MyUser.all().fetch(200)
-
-            for temp_user in mas_users:
-                if user.user_id() == temp_user.login:
-                    my_user = temp_user
-                    my_user._id = my_user.key().id()
-                    break
-
+        my_user = MyUser.all().filter('login', user.user_id()).fetch(1)[0]
         if not my_user:
-            self.response.set_status(401)
-            return
+            self.response.set_status(401); return
+        my_user._id = my_user.key().id()
 
-        for user_plan in my_user.plan:
-            if int(event_id) == int(user_plan):
-                my_user.plan.remove(str(event_id))
-                break
-
-        my_user.put()
+        if my_user.plan.count(event_id) > 0:
+            my_user.plan.remove(str(event_id))
+            curr = MyEvent.get_by_id(int(event_id))
+            curr.delete()
+            my_user.put()
+            my_user._id = my_user.key().id()
 
         self.redirect('/plan')

@@ -3,48 +3,33 @@ from google.appengine.api import users
 import datetime, time
 from models import *
 
+
 class EditHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
-        my_user = None
+        if not user:
+            self.redirect(users.create_login_url("/")); return
 
-        if user:
-            mas_users = MyUser.all().fetch(200)
-
-            for temp_user in mas_users:
-                if user.user_id() == temp_user.login:
-                    my_user = temp_user
-                    my_user._id = my_user.key().id()
-                    break
-
+        my_user = MyUser.all().filter('login', user.user_id()).fetch(1)[0]
         if not my_user:
-            self.response.set_status(401)
-            return
+            self.response.set_status(401); return
+        my_user._id = my_user.key().id()
 
         template_values = {
-            'user' : my_user,
-            'user_id' : my_user._id
+            'user' : my_user
         }
         template = main.jinja_environment.get_template('templates/edit.html')
         self.response.out.write(template.render(template_values))
 
     def post(self):
-
         web_user = users.get_current_user()
-        user = None
+        if not web_user:
+            self.redirect(users.create_login_url("/")); return
 
-        if web_user:
-            mas_users = MyUser.all().fetch(200)
-
-            for temp_user in mas_users:
-                if web_user.user_id() == temp_user.login:
-                    user = temp_user
-                    user._id = user.key().id()
-                    break
-
+        user = MyUser.all().filter('login', web_user.user_id()).fetch(1)[0]
         if not user:
-            self.response.set_status(401)
-            return
+            self.response.set_status(401); return
+        user._id = user.key().id()
 
         name = self.request.get('name')
         surname = self.request.get('surname')
@@ -87,26 +72,10 @@ class EditHandler(webapp2.RequestHandler):
 
         if birthday:
             user.birthday = birthday
-            #t = time.strptime(birthday, '%Y-%m-%d')
-            #bd = datetime.datetime(t.tm_year, t.tm_mon, t.tm_mday, 0,0,0)
-            #interval = datetime.datetime.utcnow()-bd
-            #days = interval.days
-
-            dates = birthday.split("-")
-            now = datetime.datetime.now()
-            age = int(now.year) - int(dates[0])
-            if age > 0:
-                month = int(now.month) - int(dates[1])
-                if month > 0:
-                    user.age = age
-                elif month == 0:
-                    day = int(now.day) - int(dates[2])
-                    if day < 0:
-                        user.age = age - 1
-                    else:
-                        user.age = age
-                else:
-                    user.age = age - 1
+            t = time.strptime(birthday, '%Y-%m-%d')
+            bd = datetime.datetime(t.tm_year, t.tm_mon, t.tm_mday)
+            interval = datetime.datetime.utcnow() - bd
+            user.age = int(interval.days / 365)
         else:
             user.birthday = None
             user.age = None
@@ -120,11 +89,3 @@ class EditHandler(webapp2.RequestHandler):
         user._id = user.key().id()
 
         self.redirect('/user/' + str(user._id))
-
-def try_fetch(x, t):
-    try:
-        return t(x)
-    except:
-        return None
-
-
