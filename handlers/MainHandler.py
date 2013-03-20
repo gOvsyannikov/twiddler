@@ -29,9 +29,13 @@ class MainHandler(webapp2.RequestHandler):
 
         template_values = {
             'last_seen' : my_user.location,
+<<<<<<< HEAD
             'user_id' : my_user._id,
             'neighbours' : neighbours,
             'user_list' : user_list
+=======
+            'user' : my_user
+>>>>>>> b660ab5d9c20d01f81e9e277c35ddf726ff562bf
         }
         template = main.jinja_environment.get_template('/templates/find.html')
         self.response.out.write(template.render(template_values))
