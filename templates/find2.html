@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+    {% if last_seen is not none %}
+    <script type="text/javascript">
+        var myMap;
+        ymaps.ready(function () {
+        myMap = new ymaps.Map("YMapsID", {
+            center: [{{ last_seen.lat }}, {{ last_seen.lon }}],
+            zoom: 7
+        });
+    });
+    </script>
+    {% else %}
+    <script type="text/javascript">
+        var myMap;
+        ymaps.ready(function () {
+        myMap = new ymaps.Map("YMapsID", {
+            center: [55.75, 37.45],
+            zoom: 8
+        });
+    });
+    </script>
+    {% endif %}
+    <TITLE>Twiddler</TITLE>
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#myform").submit(function(event) {
+                event.preventDefault();
+                var request = $("#req").val();
+                window.location ='http://localhost:8080/search/' + request;
+            });
+        });
+    </script>
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
+
+</head>
+<body style="background-image:url(/back.jpg)">
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Twiddler</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="divider-vertical"></li>
+                    <li><a href="/user/{{ user_id }}">Профиль</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/plan">Спланировать</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/bookmarks">Закладки</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/logout">Выйти</a></li>
+                </ul>
+                <form class="navbar-form pull-right" id="myform">
+                    <input type="text" class="span2" placeholder="Search" id="req">
+                </form>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span4">
+            {% for user in neighbours %}
+            <a href="/user/{{ user._id }}">{{ user.name }}</a>
+            {% endfor %}
+        </div>
+        <div class="span8">
+            <div id="YMapsID" style="width: 450px; height: 350px;"></div>
+            <form method = "POST">
+                {% if last_seen is not none %}
+                <div>
+                    <h4>Последний раз Вы были: {{ last_seen.lat }}, {{ last_seen.lon }}</h4>
+                </div>
+
+                {% endif %}
+                <div>
+                    <h4>Ваши координаты:</h4>
+                    <input class="input" type=text name="lat" placeholder = "Широта" required/>
+                    <input class="input" type=text name="lon" placeholder = "Долгота" required/>
+                </div>
+                <div>
+                    <input class="btn btn-primary" type="submit" value="Изменить" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

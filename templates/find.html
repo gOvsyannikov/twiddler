@@ -2,38 +2,130 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
-    {% if last_seen is not none %}
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <script type="text/javascript">
-        var myMap;
-        ymaps.ready(function () {
-        myMap = new ymaps.Map("YMapsID", {
-            center: [{{ last_seen.lat }}, {{ last_seen.lon }}],
-            zoom: 7
+    function initialize() {
+      var mapOptions = {
+        zoom: 8,
+        center: new google.maps.LatLng(55.45, 37.37),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var info;
+      var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+      {% if last_seen is not none %} 
+      var m = new google.maps.Marker({
+                  position: new google.maps.LatLng({{ last_seen.lat }}, {{ last_seen.lon }}),
+                  map: map,
+                  title: "your position"
+                });
+      {% else %}
+      var m = new google.maps.Marker({
+                  position: new google.maps.LatLng(55.45, 37.37),
+                  map: map,
+                  title: "default position"
+                });
+      {% endif %}
+      google.maps.event.addListener(m, 'click', function() {
+        if (info != null) {
+          info.close();
+        }
+      });
+
+      // bookmarks location
+
+      var book = new Array();
+      var im = 'http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png';
+      {% for i in user_list %}
+      {% if i.location is not none %}
+      var mark = new google.maps.Marker({
+                  position: new google.maps.LatLng({{ i.location.lat }}, {{ i.location.lon }}),
+                  map: map,
+                  title: "user from your bookmarks",
+                  icon: im
+                });
+      book.push(mark);
+      google.maps.event.addListener(book[book.length - 1], 'click', function(event) {
+        if (info != null) {
+          info.close();
+        }
+        else {
+          info = new google.maps.InfoWindow();
+        }
+        info.setContent('<h4><a href="/user/{{ i._id }}">{{ i.name }} {{ i.surname }}</a></h4>' +
+          '<br>Моб.: {{ i.phone }}');
+        info.setPosition(event.latLng);
+        info.open(map);
+      });
+      {% endif %}
+      {% endfor %}
+
+      //-------------------
+
+      $("#Lat").val({{ last_seen.lat }});
+      $("#Lon").val({{ last_seen.lon }});
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            //$("#Lat").val(position.coords.latitude);
+            //$("#Lon").val(position.coords.longitude);
+          m.setPosition(pos);
+          map.setCenter(pos);
+        }, function() {
+          handleNoGeolocation(true);
         });
-    });
-    </script>
-    {% else %}
-    <script type="text/javascript">
-        var myMap;
-        ymaps.ready(function () {
-        myMap = new ymaps.Map("YMapsID", {
-            center: [55.75, 37.45],
-            zoom: 8
-        });
-    });
-    </script>
-    {% endif %}
+      } else {
+        // Browser doesn't support Geolocation
+        handleNoGeolocation(false);
+      }
+
+      function handleNoGeolocation(errorFlag) {
+        if (errorFlag) {
+          var content = 'Error: The Geolocation service failed.';
+        } else {
+          var content = 'Error: Your browser doesn\'t support geolocation.';
+        }
+
+        var options = {
+          map: map,
+          position: new google.maps.LatLng(55.45, 37.37),
+          content: content
+        };
+        map.setCenter(options.position);
+      }
+      google.maps.event.addListener(map, 'click', function(event) {
+        if (info != null) {
+          info.close();
+        }
+        m.setPosition(event.latLng);
+        $("#Lat").val(m.getPosition().lat());
+        $("#Lon").val(m.getPosition().lng());
+      });
+    }
+    
+    google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+
     <TITLE>Twiddler</TITLE>
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#myform").submit(function(event) {
+                event.preventDefault();
+                var request = $("#req").val();
+                //window.location ='http://14.mytwiddler.appspot.com/search/' + request;
+                window.location ='http://14.mytwiddler.appspot.com/search/' + request;
+            });
+        });
+    </script>
     <style type="text/css">
         body {
             padding-top: 60px;
             padding-bottom: 40px;
         }
     </style>
-
 </head>
 <body style="background-image:url(/back.jpg)">
 <script src="/bootstrap/js/bootstrap.min.js"></script>
@@ -57,40 +149,35 @@
                     <li class="divider-vertical"></li>
                     <li><a href="/logout">Выйти</a></li>
                 </ul>
-                <form method="POST" class="navbar-form pull-right" action="/search">
-                    <input type="text" class="span2" placeholder="Search">
-                    <!-- button type="submit" class="btn">Найти</button -->
+                <form class="navbar-form pull-right" id="myform">
+                    <input type="text" class="span2" placeholder="Search" id="req">
                 </form>
             </div><!--/.nav-collapse -->
         </div>
     </div>
 </div>
-
+{{ request }}
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span4">
-            Тут будет информация, например
+            {% for user in neighbours %}
+            <a href="/user/{{ user._id }}">{{ user.name }}</a>
+            {% endfor %}
         </div>
         <div class="span8">
-            <div id="YMapsID" style="width: 450px; height: 350px;"></div>
+            <div id="map_canvas" style="width: 550px; height: 450px">
+            </div>
             <form method = "POST">
-                {% if last_seen is not none %}
-                <div>
-                    <h4>Последний раз Вы были: {{ last_seen.lat }}, {{ last_seen.lon }}</h4>
-                </div>
-
-                {% endif %}
-                <div>
-                    <h4>Ваши координаты:</h4>
-                    <input class="input" type=text name="lat" placeholder = "Широта" required/>
-                    <input class="input" type=text name="lon" placeholder = "Долгота" required/>
+                <div hidden>
+                    <input id="Lat" name="Lat" size="11" type=text readonly />
+                    <input id="Lon" name="Lon" size="11" type=text readonly />
                 </div>
                 <div>
+                    <!-- bbutton style = "width:210px">Запомнить</button -->
                     <input class="btn btn-primary" type="submit" value="Изменить" />
                 </div>
             </form>
         </div>
-    </div>
 </div>
 </body>
 </html>

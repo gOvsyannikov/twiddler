@@ -5,6 +5,16 @@
     <TITLE>Изменить</TITLE>
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#myform").submit(function(event) {
+                event.preventDefault();
+                var request = $("#req").val();
+                window.location ='http://14.mytwiddler.appspot.com/search/' + request;
+            });
+        });
+    </script>
     <style type="text/css">
         body {
             padding-top: 60px;
@@ -35,9 +45,8 @@
                     <li class="divider-vertical"></li>
                     <li><a href="/logout">Выйти</a></li>
                 </ul>
-                <form method="POST" class="navbar-form pull-right" action="/search">
-                    <input type="text" class="span2" placeholder="Search">
-                    <!-- button type="submit" class="btn">Найти</button -->
+                <form class="navbar-form pull-right" id="myform">
+                    <input type="text" class="span2" placeholder="Search" id="req">
                 </form>
             </div><!--/.nav-collapse -->
         </div>

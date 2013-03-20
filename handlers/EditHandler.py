@@ -10,9 +10,11 @@ class EditHandler(webapp2.RequestHandler):
         if not user:
             self.redirect(users.create_login_url("/")); return
 
-        my_user = MyUser.all().filter('login', user.user_id()).fetch(1)[0]
-        if not my_user:
+        try:
+            my_user = MyUser.all().filter('login', user.user_id()).fetch(1)[0]
+        except:
             self.response.set_status(401); return
+
         my_user._id = my_user.key().id()
 
         template_values = {
@@ -26,8 +28,9 @@ class EditHandler(webapp2.RequestHandler):
         if not web_user:
             self.redirect(users.create_login_url("/")); return
 
-        user = MyUser.all().filter('login', web_user.user_id()).fetch(1)[0]
-        if not user:
+        try:
+            user = MyUser.all().filter('login', web_user.user_id()).fetch(1)[0]
+        except:
             self.response.set_status(401); return
         user._id = user.key().id()
 
@@ -55,7 +58,7 @@ class EditHandler(webapp2.RequestHandler):
         else:
             user.email = None
 
-        if phone:
+        if phone and try_fetch(phone, int):
             user.phone = phone
         else:
             user.phone = None
@@ -89,3 +92,9 @@ class EditHandler(webapp2.RequestHandler):
         user._id = user.key().id()
 
         self.redirect('/user/' + str(user._id))
+
+def try_fetch(x, t):
+    try:
+        return t(x)
+    except:
+        return None

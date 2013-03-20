@@ -5,6 +5,7 @@ from handlers.MainHandler import *
 from handlers.BookmarksHandler import *
 from handlers.PlanHandler import *
 from handlers.DeleteHandler import *
+from handlers.SearchHandler import *
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
@@ -15,6 +16,7 @@ app = webapp2.WSGIApplication([
                                   ('/plan', PlanHandler),
                                   (r'/plan/(.*)', DeleteHandler),
                                   ('/bookmarks', BookmarksHandler),
-                                  ('/logout', LogoutHandler)
+                                  ('/logout', LogoutHandler),
+                                  (r'/search/(.*)', SearchHandler)
                               ], debug=True)
 

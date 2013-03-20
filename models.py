@@ -19,6 +19,8 @@ class MyUser(db.Model):
     image = db.StringProperty()
     _id = db.IntegerProperty()
     bookmarks = db.StringListProperty(default=[])
+    lon = db.FloatProperty()
+    lat = db.FloatProperty()
 
 class MyEvent(db.Model):
     login = db.StringProperty()

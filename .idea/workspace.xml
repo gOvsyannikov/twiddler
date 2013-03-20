@@ -6,23 +6,26 @@
     <ignored path=".idea/workspace.xml" />
     <file path="$PROJECT_DIR$/bootstrap/css/style.css" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361195343306" ignored="false" />
     <file path="/style.css" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361195136444" ignored="false" />
-    <file path="/profile.html" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361218500742" ignored="false" />
+    <file path="/profile.html" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1363723894577" ignored="false" />
     <file path="/user.py" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361220144438" ignored="false" />
-    <file path="/edit.html" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361835606461" ignored="false" />
+    <file path="/edit.html" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1363115916711" ignored="false" />
     <file path="/bookmarks.html" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1362405829894" ignored="false" />
-    <file path="/main.py" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361805876221" ignored="false" />
+    <file path="/main.py" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1363728510292" ignored="false" />
     <file path="/main.html" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361218579401" ignored="false" />
-    <file path="/find.html" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361802325992" ignored="false" />
+    <file path="/find.html" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1363768275124" ignored="false" />
     <file path="/plan.html" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361805125702" ignored="false" />
-    <file path="/ProfileHandler.py" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361837283898" ignored="false" />
+    <file path="/ProfileHandler.py" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1363723888071" ignored="false" />
     <file path="/FindHandler.py" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361276724942" ignored="false" />
     <file path="/BookmarksHandler.py" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361835319655" ignored="false" />
     <file path="/PlanHandler.py" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361831504773" ignored="false" />
-    <file path="/MainHandler.py" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361835936019" ignored="false" />
+    <file path="/MainHandler.py" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1363727625074" ignored="false" />
     <file path="/DeleteHandler.py" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361831172317" ignored="false" />
     <file path="/TODO.txt" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361825586460" ignored="false" />
-    <file path="/EditHandler.py" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1361830792198" ignored="false" />
-    <file path="/SearchHandler.py" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1362401127035" ignored="false" />
+    <file path="/EditHandler.py" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1363724971887" ignored="false" />
+    <file path="/SearchHandler.py" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1363769815135" ignored="false" />
+    <file path="/models.py" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1363721622927" ignored="false" />
+    <file path="/app.yaml" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1363710459237" ignored="false" />
+    <file path="/searchResult.html" changelist="8f6aa29f-e959-429d-bfe4-ffccf091714f" time="1363768498394" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,41 +42,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SearchHandler.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/handlers/SearchHandler.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="20" selection-start="215" selection-end="215" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bookmarks.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/bookmarks.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="54" selection-start="2139" selection-end="2139" vertical-scroll-proportion="2.1508515">
-              <folding>
-                <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="MainHandler.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/handlers/MainHandler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="8" selection-start="573" selection-end="573" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="36" selection-start="652" selection-end="652" vertical-scroll-proportion="0.0">
+            <state line="25" column="52" selection-start="828" selection-end="828" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -81,11 +53,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/edit.html">
+      <file leaf-file-name="SearchHandler.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/handlers/SearchHandler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="105" column="60" selection-start="4649" selection-end="4649" vertical-scroll-proportion="-20.346153">
+            <state line="7" column="29" selection-start="224" selection-end="224" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="searchResult.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/searchResult.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="66" selection-start="675" selection-end="700" vertical-scroll-proportion="-9.153846">
+              <folding>
+                <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="find.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/find.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="118" column="66" selection-start="4341" selection-end="4341" vertical-scroll-proportion="0.49348232">
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,22 +94,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/handlers/user.py" />
-        <option value="$PROJECT_DIR$/handlers/FindHandler.py" />
-        <option value="$PROJECT_DIR$/templates/profile.html" />
-        <option value="$PROJECT_DIR$/templates/find.html" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/TODO.txt" />
-        <option value="$PROJECT_DIR$/templates/plan.html" />
-        <option value="$PROJECT_DIR$/handlers/BookmarksHandler.py" />
-        <option value="$PROJECT_DIR$/handlers/DeleteHandler.py" />
-        <option value="$PROJECT_DIR$/templates/edit.html" />
-        <option value="$PROJECT_DIR$/handlers/EditHandler.py" />
-        <option value="$PROJECT_DIR$/handlers/MainHandler.py" />
         <option value="$PROJECT_DIR$/handlers/PlanHandler.py" />
+        <option value="C:/Program Files (x86)/Google/google_appengine/google/appengine/api/datastore_types.py" />
+        <option value="$PROJECT_DIR$/app.yaml" />
+        <option value="$PROJECT_DIR$/handlers/geohash.py" />
+        <option value="$PROJECT_DIR$/models.py" />
         <option value="$PROJECT_DIR$/handlers/ProfileHandler.py" />
-        <option value="$PROJECT_DIR$/handlers/SearchHandler.py" />
+        <option value="$PROJECT_DIR$/handlers/EditHandler.py" />
+        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/templates/bookmarks.html" />
+        <option value="$PROJECT_DIR$/templates/edit.html" />
+        <option value="$PROJECT_DIR$/templates/plan.html" />
+        <option value="$PROJECT_DIR$/templates/profile.html" />
+        <option value="$PROJECT_DIR$/handlers/MainHandler.py" />
+        <option value="$PROJECT_DIR$/handlers/SearchHandler.py" />
+        <option value="$PROJECT_DIR$/templates/searchResult.html" />
+        <option value="$PROJECT_DIR$/templates/find.html" />
       </list>
     </option>
   </component>
@@ -151,7 +145,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -204,17 +197,18 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="editor.preferences.appearance" />
+    <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -228,6 +222,9 @@
     </option>
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Dropbox\Dropbox\Study\Python\mytwiddler\handlers" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\PythonProjects\mytwiddler3\templates" />
     </key>
@@ -356,23 +353,23 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1376" height="744" extended-state="7" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19330288" sideWeight="0.39898133" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19939117" sideWeight="0.7860781" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1849315" sideWeight="0.7181664" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2139219" sideWeight="0.48630136" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28183362" sideWeight="0.48630136" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270869" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32597622" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -436,76 +433,73 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/plan.html">
+    <entry file="file://C:/Program Files (x86)/Google/google_appengine/google/appengine/api/datastore_types.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="84" selection-start="2374" selection-end="2374" vertical-scroll-proportion="1.7785888" />
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files (x86)/Google/google_appengine/lib/webapp2/webapp2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="569" column="0" selection-start="19382" selection-end="19382" vertical-scroll-proportion="0.3318078" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/EditHandler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="47" selection-start="2466" selection-end="2466" vertical-scroll-proportion="2.9839816" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/DeleteHandler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="8" selection-start="475" selection-end="511" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="22" selection-start="83" selection-end="83" vertical-scroll-proportion="0.091533184">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.8686131" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/ProfileHandler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="27" selection-start="0" selection-end="155" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#20#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/PlanHandler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="23" selection-start="184" selection-end="184" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="864" column="6" selection-start="24495" selection-end="24495" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/handlers/BookmarksHandler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="20" selection-start="16" selection-end="20" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="22" column="8" selection-start="668" selection-end="770" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/edit.html">
+    <entry file="file://$PROJECT_DIR$/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="60" selection-start="4649" selection-end="4649" vertical-scroll-proportion="-20.346153">
-          <folding />
-        </state>
+        <state line="30" column="9" selection-start="980" selection-end="980" vertical-scroll-proportion="0.6678508" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/handlers/PlanHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="20" selection-start="1010" selection-end="1010" vertical-scroll-proportion="-0.3321492" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="36" selection-start="652" selection-end="652" vertical-scroll-proportion="0.0">
+        <state line="7" column="28" selection-start="275" selection-end="275" vertical-scroll-proportion="0.21136767">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/handlers/ProfileHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="35" selection-start="1164" selection-end="1164" vertical-scroll-proportion="0.39253998" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/find2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="12" selection-start="767" selection-end="1520" vertical-scroll-proportion="0.72625697" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bookmarks.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="66" selection-start="700" selection-end="700" vertical-scroll-proportion="0.44320297" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="66" selection-start="677" selection-end="677" vertical-scroll-proportion="-8.5" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/plan.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="66" selection-start="609" selection-end="609" vertical-scroll-proportion="0.30353817" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="66" selection-start="674" selection-end="674" vertical-scroll-proportion="0.41154563" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/handlers/EditHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="17" selection-start="1822" selection-end="1827" vertical-scroll-proportion="0.030195381">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/handlers/MainHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="52" selection-start="828" selection-end="828" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -514,32 +508,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/handlers/SearchHandler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="20" selection-start="215" selection-end="215" vertical-scroll-proportion="0.0">
+        <state line="7" column="29" selection-start="224" selection-end="224" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/searchResult.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="66" selection-start="675" selection-end="700" vertical-scroll-proportion="-9.153846">
           <folding>
-            <element signature="e#0#20#0" expanded="true" />
+            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.yaml">
+    <entry file="file://$PROJECT_DIR$/templates/find.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="17" selection-start="294" selection-end="294" vertical-scroll-proportion="0.7002288">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/MainHandler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="8" selection-start="573" selection-end="573" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/bookmarks.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="54" selection-start="2139" selection-end="2139" vertical-scroll-proportion="2.1508515">
+        <state line="118" column="66" selection-start="4341" selection-end="4341" vertical-scroll-proportion="0.49348232">
           <folding>
-            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

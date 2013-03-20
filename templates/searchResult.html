@@ -22,19 +22,19 @@
             padding-bottom: 40px;
         }
     </style>
-<style>
-</style>
+    <style>
+    </style>
 </head>
 <body style="background-image:url(/back.jpg)">
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 
 <div class="navbar navbar-fixed-top">
-                <div class="navbar-inner">
-                    <div class="container">
-                        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
             <a class="brand" href="/">Twiddler</a>
             <div class="nav-collapse collapse">
@@ -55,14 +55,13 @@
         </div>
     </div>
 </div>
-
 <div class="container">
-	<table class="table table-hover">
+    <table class="table table-hover">
         <thead>
-            <td>Имя</td>
-            <td>Email</td>
-            <td>VK</td>
-            <td>Телефон</td>
+        <td>Имя</td>
+        <td>Email</td>
+        <td>VK</td>
+        <td>Телефон</td>
         </thead>
         <tbody>
         {% for U in user_list %}
@@ -73,11 +72,11 @@
             <td><a href="/user/{{ U._id }}">{{ U.name }}</a></td>
             {% endif %}
             <td><a href="mailto:{{ U.email }}">{{ U.email }}</a></td>
-        	{% if U.vk_id is not none %}
-        	<td><a href="http://vk.com/{{ U.vk_id }}">{{ U.vk_id }}</a></td>
-        	{% else %}
-        	<td>-</td>
-        	{% endif %}
+            {% if U.vk_id is not none %}
+            <td><a href="http://vk.com/{{ U.vk_id }}">{{ U.vk_id }}</a></td>
+            {% else %}
+            <td>-</td>
+            {% endif %}
             {% if U.phone is not none %}
             <td>{{ U.phone }}</td>
             {% else %}
@@ -86,7 +85,26 @@
         </tr>
         {% endfor %}
         </tbody>
-	</table>
+    </table>
+
+    <table class="table table-hover">
+        <thead>
+        <td>Имя</td>
+        <td>Начало</td>
+        <td>Конец</td>
+        <td>Создатель</td>
+        </thead>
+        <tbody>
+        {% for event in event_list %}
+        <tr>
+            <td>{{ event.name }}</td>
+            <td>{{ event.start }}</td>
+            <td>{{ event.end }}</td>
+            <td>-</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 </body>
 </html> 

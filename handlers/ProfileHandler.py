@@ -29,11 +29,18 @@ class ProfileHandler(webapp2.RequestHandler):
         if c_user.bookmarks.count(str(user._id)) > 0:
             mark2 = True
 
+        plan_list = []
+        for user_plan in user.plan:
+            curr = MyEvent.get_by_id(int(user_plan))
+            curr._id = curr.key().id()
+            plan_list.append(curr)
+
         template_values = {
             'user' : user,
             'user_id' : c_user._id,
             'mark' : mark,
-            'mark2' : mark2
+            'mark2' : mark2,
+            'plan_list' : plan_list
         }
         template = main.jinja_environment.get_template('templates/profile.html')
         self.response.out.write(template.render(template_values))
